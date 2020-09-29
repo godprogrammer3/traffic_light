@@ -7,6 +7,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => SplashScreen());
     case LoginScreenRoute:
       return MaterialPageRoute(builder: (context) => LoginScreen());
+    case HomeScreenRoute:
+      return MaterialPageRoute(builder: (context) => HomeScreen());
     default:
       return MaterialPageRoute(builder: (context) => NotFoundScreen());
   }

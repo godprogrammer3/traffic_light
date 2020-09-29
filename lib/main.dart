@@ -8,12 +8,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme: ThemeData(primaryColor: Colors.green),
         title: 'Traffic light',
-        theme: ThemeData(
-          primarySwatch: Colors.green,
-        ),
         onGenerateRoute: router.generateRoute,
-        initialRoute: SplashScreenRoute
-    );
+        initialRoute: SplashScreenRoute);
   }
 }
