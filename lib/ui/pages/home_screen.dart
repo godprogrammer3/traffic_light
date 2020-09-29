@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:traffic_light/ui/widgets/image_display.dart';
+import 'package:traffic_light/router/routing_constant.dart';
+import 'package:traffic_light/ui/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -9,12 +10,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Color> _listColors =
-      List.generate(2, (index) => Color.fromARGB(255, 232, 245, 233));
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
+        endDrawer: generateEndDrawer(),
         appBar: AppBar(
+          elevation: 10,
           title: Text(
             'Home',
             style: TextStyle(fontSize: 30),
@@ -25,7 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   Icons.account_circle,
                   size: 40,
                 ),
-                onPressed: () {})
+                onPressed: () {
+                  _scaffoldKey.currentState.openEndDrawer();
+                })
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -37,37 +42,26 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ListView.builder(
           itemCount: 2,
           itemBuilder: (context, index) {
-            return GestureDetector(
-              onTapDown: (touchDetail) {
-                setState(() {
-                  _listColors[index] = Colors.grey[300];
-                });
-              },
-              onTapUp: (touchDetail) {
-                setState(() {
-                  _listColors[index] = Color.fromARGB(255, 232, 245, 233);
-                });
-              },
-              onTapCancel: () {
-                setState(() {
-                  _listColors[index] = Color.fromARGB(255, 232, 245, 233);
-                });
-              },
-              onTap: () {
-                print('tab confirm');
-              },
-              child: Container(
-                margin: EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        offset: new Offset(2, 2),
-                        blurRadius: 1,
-                      )
-                    ],
-                    color: _listColors[index],
-                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            return Container(
+              margin: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  offset: new Offset(2, 2),
+                  blurRadius: 1,
+                )
+              ], borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              child: RaisedButton(
+                onPressed: () {
+                  if (index % 2 == 0) {
+                    Navigator.pushNamed(context, ControlType1ScreenRoute,
+                        arguments: index);
+                  } else {
+                    Navigator.pushNamed(context, ControlType2ScreenRoute,
+                        arguments: index);
+                  }
+                },
+                color: Color.fromARGB(255, 232, 245, 233),
                 child: Row(
                   children: <Widget>[
                     ImageDisplay(
@@ -87,5 +81,95 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
         )));
+  }
+
+  Widget generateEndDrawer() {
+    return Column(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(left: 20, top: 25),
+          height: 100,
+          color: Colors.green,
+          child: Row(
+            children: <Widget>[
+              Icon(
+                Icons.account_circle,
+                color: Colors.white,
+                size: 60,
+              ),
+              SizedBox(
+                width: 25,
+              ),
+              Text(
+                "Account",
+                style: TextStyle(fontSize: 30, color: Colors.white),
+              )
+            ],
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(color: Colors.white, boxShadow: [
+            BoxShadow(
+              color: Colors.black54,
+              offset: new Offset(0, 10),
+              blurRadius: 10,
+            )
+          ]),
+          height: 150,
+          child: Column(children: <Widget>[
+            RaisedButton(
+              padding: EdgeInsets.all(15),
+              elevation: 0,
+              color: Colors.white,
+              onPressed: () {
+                Navigator.pushReplacementNamed(
+                    context, ChangePasswordScreenRoute);
+              },
+              child: Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.lock,
+                    size: 40,
+                  ),
+                  SizedBox(width: 25),
+                  Text(
+                    'Change password',
+                    style: TextStyle(fontSize: 25),
+                  )
+                ],
+              ),
+            ),
+            RaisedButton(
+              padding: EdgeInsets.all(15),
+              elevation: 0,
+              color: Colors.white,
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, LoginScreenRoute);
+              },
+              child: Row(
+                children: <Widget>[
+                  SizedBox(
+                    width: 10,
+                  ),
+                  ImageDisplay(
+                    imageName: 'logout.svg',
+                    width: 30,
+                    height: 30,
+                    color: Colors.black,
+                  ),
+                  SizedBox(
+                    width: 25,
+                  ),
+                  Text(
+                    'Log out',
+                    style: TextStyle(fontSize: 25),
+                  )
+                ],
+              ),
+            ),
+          ]),
+        )
+      ],
+    );
   }
 }

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ImageDisplay extends StatelessWidget {
   final String imageName;
   final String assetPath = 'assets/images/';
   final double width;
   final double height;
+  final Color color;
   const ImageDisplay(
-      {Key key, @required this.imageName, this.width, this.height})
+      {Key key, @required this.imageName, this.width, this.height, this.color})
       : super(key: key);
 
   @override
@@ -15,7 +17,7 @@ class ImageDisplay extends StatelessWidget {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       if (width == null && height == null) {
-        return  getImage();
+        return getImage();
       } else if (width == null) {
         return Container(
           width: constraints.maxWidth,
@@ -39,9 +41,17 @@ class ImageDisplay extends StatelessWidget {
   }
 
   Widget getImage() {
+    if (imageName.contains('.svg')) {
+      return SvgPicture.asset(
+        assetPath + imageName,
+        semanticsLabel: 'svg img',
+        color: color,
+      );
+    } else {
       return Image.asset(
         assetPath + imageName,
         fit: BoxFit.contain,
       );
+    }
   }
 }
