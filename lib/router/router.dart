@@ -23,6 +23,16 @@ Route<dynamic> generateRoute(RouteSettings settings) {
               ));
     case ChangePasswordScreenRoute:
       return MaterialPageRoute(builder: (context) => ChangePasswordScreen());
+    case AddIntersectionScreenRoute:
+      return MaterialPageRoute(
+          builder: (context) => AddIntersectionScreen(
+                intersectionId: arguments,
+              ));
+    case RenameIntersectionScreenRoute:
+      return MaterialPageRoute(
+          builder: (context) => RenameIntersectionScreen(
+                intersectionId: arguments,
+              ));
     default:
       return MaterialPageRoute(builder: (context) => NotFoundScreen());
   }

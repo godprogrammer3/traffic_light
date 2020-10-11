@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:traffic_light/router/routing_constant.dart';
 
-class ChangePasswordScreen extends StatefulWidget {
-  ChangePasswordScreen({Key key}) : super(key: key);
+class AddIntersectionScreen extends StatefulWidget {
+  final String intersectionId;
+  AddIntersectionScreen({Key key, @required this.intersectionId})
+      : super(key: key);
 
   @override
-  _ChangePasswordScreenState createState() => _ChangePasswordScreenState();
+  _AddIntersectionScreenState createState() => _AddIntersectionScreenState();
 }
 
-class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+class _AddIntersectionScreenState extends State<AddIntersectionScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -25,8 +27,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 Navigator.pushReplacementNamed(context, HomeScreenRoute);
               }),
           title: Text(
-            'Change password',
-            style: TextStyle(fontSize: 30, color: Colors.white),
+            'Add intersection',
+            style: TextStyle(color: Colors.white, fontSize: 30),
           ),
         ),
         body: SingleChildScrollView(
@@ -44,61 +46,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           width: 300,
                           height: 50,
                           child: TextFormField(
-                            obscureText: true,
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.grey[900])),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always,
-                                hintText: 'Old password'),
+                                hintText: 'Name'),
                           ),
                         )
                       ],
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 30),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            width: 300,
-                            height: 50,
-                            child: TextFormField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.grey[900])),
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
-                                  hintText: 'New password'),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 30),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            width: 300,
-                            height: 50,
-                            child: TextFormField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.grey[900])),
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
-                                  hintText: 'Confirm new password'),
-                            ),
-                          )
-                        ],
-                      ),
                     ),
                     SizedBox(
                       height: 30,

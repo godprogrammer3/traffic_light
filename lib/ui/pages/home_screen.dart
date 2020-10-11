@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:traffic_light/router/routing_constant.dart';
 import 'package:traffic_light/ui/widgets/widgets.dart';
+import 'package:barcode_scan/barcode_scan.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -34,7 +36,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            scan();
+          },
           child: Icon(Icons.add),
           backgroundColor: Colors.green,
         ),
@@ -171,5 +175,33 @@ class _HomeScreenState extends State<HomeScreen> {
         )
       ],
     );
+  }
+
+  Future scan() async {
+    try {
+      ScanResult scanResult = await BarcodeScanner.scan();
+      if (scanResult.rawContent != null && scanResult.rawContent != '') {
+        Navigator.pushReplacementNamed(context, AddIntersectionScreenRoute,
+            arguments: scanResult.rawContent);
+      } else {
+        Navigator.pushReplacementNamed(context, HomeScreenRoute);
+      }
+    } on PlatformException catch (e) {
+      if (e.code == BarcodeScanner.cameraAccessDenied) {
+        _scaffoldKey.currentState.showSnackBar(SnackBar(
+          content: Text('Please allow camera permission.'),
+        ));
+      } else {
+        _scaffoldKey.currentState.showSnackBar(SnackBar(
+          content: Text('PlaformException error was occurred.'),
+        ));
+      }
+    } on FormatException {
+      print('user cancel');
+    } catch (e) {
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+        content: Text('Unknow error was occurred.'),
+      ));
+    }
   }
 }

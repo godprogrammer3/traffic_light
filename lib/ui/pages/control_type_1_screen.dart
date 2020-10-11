@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traffic_light/router/routing_constant.dart';
 
 enum Mode { Auto, Manual, Flashing, AllRed, Actuated, SignalChange }
 
@@ -20,17 +21,30 @@ class _ControlType1ScreenState extends State<ControlType1Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          elevation: 10,
-          title: Row(
-            children: <Widget>[
-              Text(
-                'แยก $index',
-                style: TextStyle(fontSize: 30),
-              ),
-              Spacer(),
-              Text('Plan : 8', style: TextStyle(fontSize: 30))
-            ],
-          )),
+        elevation: 10,
+        title: Row(
+          children: <Widget>[
+            Text(
+              'แยก $index',
+              style: TextStyle(fontSize: 30),
+            ),
+            Spacer(),
+            Text('Plan 8', style: TextStyle(fontSize: 25))
+          ],
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.settings,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, RenameIntersectionScreenRoute,
+                  arguments: index);
+            },
+          )
+        ],
+      ),
       body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[

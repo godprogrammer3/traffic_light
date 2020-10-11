@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:traffic_light/router/routing_constant.dart';
 import 'control_type_1_screen.dart';
 
 class ControlType2Screen extends StatefulWidget {
@@ -19,15 +20,28 @@ class _ControlType2ScreenState extends State<ControlType2Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          elevation: 10,
-          title: Row(
-            children: <Widget>[
-              Text(
-                'แยก $index',
-                style: TextStyle(fontSize: 30),
-              ),
-            ],
-          )),
+        elevation: 10,
+        title: Row(
+          children: <Widget>[
+            Text(
+              'แยก $index',
+              style: TextStyle(fontSize: 30),
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.settings,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, RenameIntersectionScreenRoute,
+                  arguments: index);
+            },
+          )
+        ],
+      ),
       body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[

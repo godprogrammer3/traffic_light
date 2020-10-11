@@ -4,3 +4,5 @@ const String HomeScreenRoute = '/home';
 const String ControlType1ScreenRoute = '/control1';
 const String ControlType2ScreenRoute = '/control2';
 const String ChangePasswordScreenRoute = '/change_password';
+const String AddIntersectionScreenRoute = '/add_intersection';
+const String RenameIntersectionScreenRoute = '/rename_intersection';
