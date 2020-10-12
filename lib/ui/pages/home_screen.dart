@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:traffic_light/router/routing_constant.dart';
-import 'package:traffic_light/ui/widgets/widgets.dart';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:traffic_light/ui/smart_widget/image_display/image_display.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);

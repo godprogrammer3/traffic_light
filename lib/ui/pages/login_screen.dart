@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:traffic_light/router/routing_constant.dart';
-import 'package:traffic_light/ui/widgets/widgets.dart';
+import 'package:traffic_light/ui/smart_widget/image_display/image_display.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key key}) : super(key: key);
@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ]),
             Container(
               margin: EdgeInsets.fromLTRB(0, 50, 0, 50),
-                          child: Form(
+              child: Form(
                 child: Column(
                   children: <Widget>[
                     Row(
@@ -45,7 +45,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             decoration: InputDecoration(
                                 suffixIcon: Icon(Icons.account_circle),
                                 border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey[900])),
+                                    borderSide:
+                                        BorderSide(color: Colors.grey[900])),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always,
                                 hintText: 'Email'),
@@ -53,9 +54,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         )
                       ],
                     ),
-                     Container(
-                       margin: EdgeInsets.only(top:30),
-                       child: Row(
+                    Container(
+                      margin: EdgeInsets.only(top: 30),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Container(
@@ -64,21 +65,27 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: TextFormField(
                               obscureText: isPasswordHide,
                               decoration: InputDecoration(
-                                suffixIcon: IconButton(icon:Icon((isPasswordHide)?Icons.visibility:Icons.visibility_off), onPressed: () {  
-                                  setState((){
-                                    isPasswordHide = !isPasswordHide;
-                                  });
-                                },),
+                                  suffixIcon: IconButton(
+                                    icon: Icon((isPasswordHide)
+                                        ? Icons.visibility
+                                        : Icons.visibility_off),
+                                    onPressed: () {
+                                      setState(() {
+                                        isPasswordHide = !isPasswordHide;
+                                      });
+                                    },
+                                  ),
                                   border: OutlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.grey[900])),
+                                      borderSide:
+                                          BorderSide(color: Colors.grey[900])),
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always,
                                   hintText: 'Password'),
                             ),
                           )
                         ],
+                      ),
                     ),
-                     ),
                   ],
                 ),
               ),
@@ -88,8 +95,8 @@ class _LoginScreenState extends State<LoginScreen> {
               children: <Widget>[
                 RaisedButton(
                   padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
-                  onPressed: (){
-                     Navigator.pushReplacementNamed(context, HomeScreenRoute);
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, HomeScreenRoute);
                   },
                   child: Text(
                     'LOGIN',
