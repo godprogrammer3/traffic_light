@@ -30,6 +30,8 @@ GetIt $initGetIt(
   gh.lazySingleton<IntersectionService>(() => IntersectionService());
   gh.lazySingleton<NavigationService>(
       () => thirdPartyServicesModules.navigationService);
+  gh.lazySingleton<SnackbarService>(
+      () => thirdPartyServicesModules.snackBarService);
   return get;
 }
 
@@ -38,4 +40,6 @@ class _$ThirdPartyServicesModules extends ThirdPartyServicesModules {
   DialogService get dialogService => DialogService();
   @override
   NavigationService get navigationService => NavigationService();
+  @override
+  SnackbarService get snackBarService => SnackbarService();
 }

@@ -11,8 +11,9 @@ class SplashViewModel extends FutureViewModel<void> {
   Future<void> startupLogic() async {
     await Future.delayed(const Duration(seconds: 2));
     if (_authenticationService.currentUser != null) {
-      await _navigationService.replaceWith(Routes.homeView,
-          arguments: User.fromFirebaseUser(_authenticationService.currentUser));
+      await _navigationService.replaceWith(
+        Routes.homeView,
+      );
     } else {
       await _navigationService.replaceWith(Routes.loginView);
     }
