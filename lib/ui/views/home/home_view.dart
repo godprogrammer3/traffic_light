@@ -14,7 +14,7 @@ class HomeView extends HookWidget {
         onModelReady: (model) => model.getIntersections(),
         builder: (context, model, child) => Scaffold(
             key: model.scaffoldKey,
-            endDrawer: endDrawer(),
+            endDrawer: endDrawer(model),
             appBar: AppBar(
               elevation: 10,
               title: Text(
@@ -56,11 +56,7 @@ class HomeView extends HookWidget {
                     ], borderRadius: BorderRadius.all(Radius.circular(10.0))),
                     child: RaisedButton(
                       onPressed: () {
-                        if (index % 2 == 0) {
-                          print('Control type 1 route');
-                        } else {
-                          print('Control type 2 route');
-                        }
+                        model.openIntersection(index);
                       },
                       color: Color.fromARGB(255, 232, 245, 233),
                       child: Row(
@@ -86,7 +82,7 @@ class HomeView extends HookWidget {
         viewModelBuilder: () => HomeViewModel());
   }
 
-  Widget endDrawer() {
+  Widget endDrawer(HomeViewModel model) {
     return Column(
       children: <Widget>[
         Container(
@@ -146,7 +142,7 @@ class HomeView extends HookWidget {
               elevation: 0,
               color: Colors.white,
               onPressed: () {
-                print('go to login screen');
+                model.logOut();
               },
               child: Row(
                 children: <Widget>[
