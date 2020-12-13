@@ -19,7 +19,20 @@ class IntersectionService {
     if (user != null) {
       DataSnapshot result = await _databaseService.getIntersections(user: user);
       if (result.value != null) {
-        return Intersection.fromDataSnapshot(result);
+        List<Map<String, dynamic>> allIntesectionList =
+            List<Map<String, dynamic>>();
+        List<Intersection> resultIntersections = List<Intersection>();
+        result.value.forEach((key, value) {
+          allIntesectionList.add({'id': key, 'name': value['name']});
+        });
+        for (var i = 0; i < allIntesectionList.length; i++) {
+          var intersectionSnapshot = await _databaseService.getIntersection(
+              id: allIntesectionList[i]['id']);
+          intersectionSnapshot.value['name'] = allIntesectionList[i]['name'];
+          resultIntersections
+              .add(Intersection.fromDataSnapshot(intersectionSnapshot));
+        }
+        return resultIntersections;
       } else {
         return <Intersection>[];
       }
@@ -29,12 +42,15 @@ class IntersectionService {
   }
 
   Future<bool> addIntersection(
-      {@required String intersectionId, @required String intersectionName}) {
+      {@required String intersectionId,
+      @required String intersectionName,
+      @required String intersectionType}) {
     User user = getCurrentUser();
     if (user != null) {
       return _databaseService.addIntersection(
           intersectionId: intersectionId,
           intersectionName: intersectionName,
+          intersectionType: intersectionType,
           user: user);
     } else {
       throw UserNotLogIn();

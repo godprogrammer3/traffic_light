@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:loading_overlay/loading_overlay.dart';
@@ -9,7 +11,8 @@ class AddIntersectionView extends HookWidget {
   const AddIntersectionView({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    String intersectionId = ModalRoute.of(context).settings.arguments;
+    Map<String, dynamic> intersectionMap =
+        json.decode(ModalRoute.of(context).settings.arguments);
     var nameController = useTextEditingController();
     return ViewModelBuilder<AddIntersectionViewModel>.reactive(
         builder: (context, model, child) => WillPopScope(
@@ -82,7 +85,9 @@ class AddIntersectionView extends HookWidget {
                                       if (model.formkey.currentState
                                           .validate()) {
                                         model.addIntersection(
-                                          intersectionId: intersectionId,
+                                          intersectionId: intersectionMap['id'],
+                                          intersectionType:
+                                              intersectionMap['type'],
                                           intersectionName: nameController.text,
                                         );
                                       }

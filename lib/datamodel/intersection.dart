@@ -44,13 +44,23 @@ class Intersection {
     } else {
       this.mode = Mode.Unknown;
     }
-    this.plan == value['plan'] ?? -1;
+    this.plan = value['plan'] ?? -1;
     this.currentButton = value['currentButton'] ?? -1;
   }
-  static List<Intersection> fromDataSnapshot(DataSnapshot snapshot) {
-    List<Intersection> intersections = List<Intersection>();
-    snapshot.value.forEach((key, value) =>
-        intersections.add(Intersection.fromKeyValue(key, value)));
-    return intersections;
+  static Intersection fromDataSnapshot(DataSnapshot snapshot) {
+    Intersection resultIntersection =
+        Intersection.fromKeyValue(snapshot.key, snapshot.value);
+    return resultIntersection;
+  }
+
+  String toString() {
+    return '''Intersection{
+      id : ${this.id},
+      name : ${this.name},
+      type : ${this.type},
+      mode : ${this.mode},
+      plan : ${this.plan},
+      currentButton : ${this.currentButton}
+    }''';
   }
 }

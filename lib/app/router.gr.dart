@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import '../ui/views/add_intersection/add_intersection_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/login/login_view.dart';
+import '../ui/views/normal_intersection/normal_intersection_view.dart';
 import '../ui/views/splash/splash_view.dart';
 
 class Routes {
@@ -19,11 +20,13 @@ class Routes {
   static const String loginView = '/login-view';
   static const String homeView = '/home-view';
   static const String addIntersectionView = '/add-intersection-view';
+  static const String normalIntersectionView = '/normal-intersection-view';
   static const all = <String>{
     splashView,
     loginView,
     homeView,
     addIntersectionView,
+    normalIntersectionView,
   };
 }
 
@@ -35,6 +38,7 @@ class Router extends RouterBase {
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.addIntersectionView, page: AddIntersectionView),
+    RouteDef(Routes.normalIntersectionView, page: NormalIntersectionView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -60,6 +64,12 @@ class Router extends RouterBase {
     AddIntersectionView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const AddIntersectionView(),
+        settings: data,
+      );
+    },
+    NormalIntersectionView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const NormalIntersectionView(),
         settings: data,
       );
     },

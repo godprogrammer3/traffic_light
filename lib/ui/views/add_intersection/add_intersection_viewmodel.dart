@@ -18,14 +18,15 @@ class AddIntersectionViewModel extends BaseViewModel {
 
   Future<void> addIntersection({
     @required String intersectionId,
-    @required intersectionName,
+    @required String intersectionName,
+    @required String intersectionType,
   }) async {
     try {
       setBusy(true);
       var result = await _intersectionService.addIntersection(
-        intersectionId: intersectionId,
-        intersectionName: intersectionName,
-      );
+          intersectionId: intersectionId,
+          intersectionName: intersectionName,
+          intersectionType: intersectionType);
       setBusy(false);
       if (result) {
         _navigationService.clearStackAndShow(Routes.homeView);

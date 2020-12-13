@@ -77,10 +77,13 @@ class HomeViewModel extends BaseViewModel {
     }
   }
 
-  Future<void> openIntersection(int index) async {
+  Future<void> openIntersection(
+    int index,
+  ) async {
     if (this._intersections[index] != null) {
       if (this._intersections[index].type == IntersectionType.Normal) {
-        print('goto intersection type normal');
+        _navigationService.navigateTo(Routes.normalIntersectionView,
+            arguments: this._intersections[index]);
       } else if (this._intersections[index].type == IntersectionType.Genius) {
         print('goto intersection type genius');
       } else {
