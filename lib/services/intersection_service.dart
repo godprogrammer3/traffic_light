@@ -64,6 +64,24 @@ class IntersectionService {
       return null;
     }
   }
+
+  Future<int> updateIntersectionName(
+      {@required String id, @required String name}) async {
+    User user = getCurrentUser();
+    if (user != null) {
+      try {
+        await _databaseService
+            .update(path: user.id + '/' + id, value: {'name': name});
+        return 0;
+      } catch (error) {
+        print('Error in intersection_service > updateIntersectionName() :');
+        print(error);
+        return -1;
+      }
+    } else {
+      throw UserNotLogIn();
+    }
+  }
 }
 
 class UserNotLogIn extends Error {

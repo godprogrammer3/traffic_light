@@ -8,16 +8,11 @@ import 'package:traffic_light/app/locator.dart';
 import 'package:traffic_light/app/router.gr.dart';
 import 'package:traffic_light/datamodel/intersection.dart';
 import 'package:traffic_light/services/database_service.dart';
-import 'package:traffic_light/services/intersection_service.dart';
 
 class NormalIntersectionViewModel extends BaseViewModel {
   NavigationService _navigationService = locator<NavigationService>();
-  final _intersectionService = locator<IntersectionService>();
-  final _formKey = GlobalKey<FormState>();
-  final _snackbarService = locator<SnackbarService>();
   final _databaseService = locator<DatabaseService>();
   Intersection _intersection;
-  GlobalKey<FormState> get formkey => _formKey;
   StreamSubscription<Event> _streamSubscription;
   void goToHomePage() {
     _navigationService.clearStackAndShow(Routes.homeView);
@@ -48,6 +43,11 @@ class NormalIntersectionViewModel extends BaseViewModel {
 
   Future<int> updateIntesection({@required Map<String, dynamic> value}) async {
     return _databaseService.update(
-        path: 'devices/' + this.intersection.id, value: value);
+        path: 'devices/' + this._intersection.id, value: value);
+  }
+
+  void gotoRenameIntersectionPage() {
+    _navigationService.navigateTo(Routes.renameIntersectionView,
+        arguments: _intersection);
   }
 }

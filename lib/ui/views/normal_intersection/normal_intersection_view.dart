@@ -42,7 +42,7 @@ class NormalIntersectionView extends HookWidget {
                         size: 30,
                       ),
                       onPressed: () {
-                        print('go to rename intersection page');
+                        model.gotoRenameIntersectionPage();
                       })
                 ],
               ),
