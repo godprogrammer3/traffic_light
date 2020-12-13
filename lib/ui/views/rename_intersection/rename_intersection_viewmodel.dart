@@ -1,13 +1,11 @@
 import 'dart:async';
 
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:traffic_light/app/locator.dart';
 import 'package:traffic_light/app/router.gr.dart';
 import 'package:traffic_light/datamodel/intersection.dart';
-import 'package:traffic_light/services/database_service.dart';
 import 'package:traffic_light/services/intersection_service.dart';
 
 class RenameIntersectionViewModel extends BaseViewModel {
@@ -31,7 +29,8 @@ class RenameIntersectionViewModel extends BaseViewModel {
           _navigationService.replaceWith(Routes.normalIntersectionView,
               arguments: this._intersection);
         } else if (_intersection.type == IntersectionType.Genius) {
-          print('go to genius intersection page');
+          _navigationService.replaceWith(Routes.geniusIntersectionView,
+              arguments: this._intersection);
         } else {
           print(
               'Error Unknow intersection type in rename_intersection_viewmodel > updateIntesectionName');

@@ -85,7 +85,8 @@ class HomeViewModel extends BaseViewModel {
         _navigationService.navigateTo(Routes.normalIntersectionView,
             arguments: this._intersections[index]);
       } else if (this._intersections[index].type == IntersectionType.Genius) {
-        print('goto intersection type genius');
+        _navigationService.navigateTo(Routes.geniusIntersectionView,
+            arguments: this._intersections[index]);
       } else {
         _snackbarService.showSnackbar(
           message: 'Error unknow intersection type',
