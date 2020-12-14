@@ -3,7 +3,6 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:traffic_light/app/locator.dart';
 import 'package:traffic_light/app/router.gr.dart';
-import 'package:traffic_light/datamodel/user.dart';
 import 'package:traffic_light/services/authentication_service.dart';
 
 class LoginViewModel extends BaseViewModel {

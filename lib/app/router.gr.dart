@@ -10,6 +10,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../ui/views/add_intersection/add_intersection_view.dart';
+import '../ui/views/change_password/change_password_view.dart';
 import '../ui/views/genius_intersection/genius_intersection_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/login/login_view.dart';
@@ -25,6 +26,7 @@ class Routes {
   static const String normalIntersectionView = '/normal-intersection-view';
   static const String renameIntersectionView = '/rename-intersection-view';
   static const String geniusIntersectionView = '/genius-intersection-view';
+  static const String changePasswordView = '/change-password-view';
   static const all = <String>{
     splashView,
     loginView,
@@ -33,6 +35,7 @@ class Routes {
     normalIntersectionView,
     renameIntersectionView,
     geniusIntersectionView,
+    changePasswordView,
   };
 }
 
@@ -47,6 +50,7 @@ class Router extends RouterBase {
     RouteDef(Routes.normalIntersectionView, page: NormalIntersectionView),
     RouteDef(Routes.renameIntersectionView, page: RenameIntersectionView),
     RouteDef(Routes.geniusIntersectionView, page: GeniusIntersectionView),
+    RouteDef(Routes.changePasswordView, page: ChangePasswordView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -90,6 +94,12 @@ class Router extends RouterBase {
     GeniusIntersectionView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const GeniusIntersectionView(),
+        settings: data,
+      );
+    },
+    ChangePasswordView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const ChangePasswordView(),
         settings: data,
       );
     },

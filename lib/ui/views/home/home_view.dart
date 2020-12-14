@@ -121,7 +121,7 @@ class HomeView extends HookWidget {
               elevation: 0,
               color: Colors.white,
               onPressed: () {
-                print('goto change password screen');
+                model.gotoChangePasswordPage();
               },
               child: Row(
                 children: <Widget>[

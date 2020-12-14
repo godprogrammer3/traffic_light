@@ -100,4 +100,8 @@ class HomeViewModel extends BaseViewModel {
       );
     }
   }
+
+  void gotoChangePasswordPage() {
+    _navigationService.navigateTo(Routes.changePasswordView);
+  }
 }
