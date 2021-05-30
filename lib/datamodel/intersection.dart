@@ -11,13 +11,17 @@ class Intersection {
   Mode mode;
   int plan;
   int currentButton;
+  DateTime timeStamp;
+  Duration timeCount;
   Intersection(
       {@required this.id,
       @required this.name,
       @required this.type,
       @required this.mode,
       @required this.plan,
-      @required this.currentButton});
+      @required this.currentButton,
+      @required this.timeStamp,
+      @required this.timeCount});
 
   Intersection.fromKeyValue(String key, Map<dynamic, dynamic> value) {
     this.id = key;
@@ -46,6 +50,12 @@ class Intersection {
     }
     this.plan = value['plan'] ?? -1;
     this.currentButton = value['currentButton'] ?? -1;
+    this.timeStamp = (value['timeStamp'] != null)
+        ? new DateTime.fromMillisecondsSinceEpoch(value['timeStamp'])
+        : null;
+    this.timeCount = (value['timeCount'] != null)
+        ? new Duration(seconds: value['timeCount'])
+        : null;
   }
   static Intersection fromDataSnapshot(DataSnapshot snapshot) {
     Intersection resultIntersection =
@@ -60,7 +70,9 @@ class Intersection {
       type : ${this.type},
       mode : ${this.mode},
       plan : ${this.plan},
-      currentButton : ${this.currentButton}
+      currentButton : ${this.currentButton},
+      timeStamp: ${this.timeStamp},
+      timeCount: ${this.timeCount}
     }''';
   }
 }

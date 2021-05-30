@@ -61,7 +61,7 @@ class NormalIntersectionView extends HookWidget {
                                   style: BorderStyle.solid),
                               borderRadius: BorderRadius.circular(10)),
                           child: Text(
-                            '9999',
+                            model.display,
                             style: TextStyle(fontSize: 80),
                           ),
                         )
