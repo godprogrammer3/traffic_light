@@ -51,7 +51,7 @@ class Intersection {
     this.plan = value['plan'] ?? -1;
     this.currentButton = value['currentButton'] ?? -1;
     this.timeStamp = (value['timeStamp'] != null)
-        ? new DateTime.fromMillisecondsSinceEpoch(value['timeStamp'])
+        ? new DateTime.fromMillisecondsSinceEpoch(value['timeStamp'] * 1000)
         : null;
     this.timeCount = (value['timeCount'] != null)
         ? new Duration(seconds: value['timeCount'])
