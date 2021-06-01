@@ -8,6 +8,7 @@ import 'package:traffic_light/app/locator.dart';
 import 'package:traffic_light/app/router.gr.dart';
 import 'package:traffic_light/datamodel/intersection.dart';
 import 'package:traffic_light/services/database_service.dart';
+import 'package:ntp/ntp.dart';
 
 class NormalIntersectionViewModel extends BaseViewModel {
   NavigationService _navigationService = locator<NavigationService>();
@@ -30,7 +31,7 @@ class NormalIntersectionViewModel extends BaseViewModel {
         .listen((event) => eventHandler(event));
   }
 
-  void eventHandler(Event event) {
+  void eventHandler(Event event) async {
     event.snapshot.value['name'] = this.intersection.name;
     _intersection = Intersection.fromDataSnapshot(event.snapshot);
     print(_intersection);
@@ -46,7 +47,7 @@ class NormalIntersectionViewModel extends BaseViewModel {
       }
     } else if (_intersection.mode == Mode.Manual) {
       if (_intersection.timeStamp != null) {
-        DateTime nowTime = new DateTime.now();
+        DateTime nowTime = await NTP.now();
         _timeCounter = nowTime.difference(_intersection.timeStamp);
         if (_timer != null) {
           _timer.cancel();
@@ -61,7 +62,7 @@ class NormalIntersectionViewModel extends BaseViewModel {
       }
     } else if (_intersection.mode == Mode.Auto) {
       if (_intersection.timeStamp != null) {
-        DateTime nowTime = new DateTime.now();
+        DateTime nowTime = await NTP.now();
         _timeCounter = nowTime.difference(_intersection.timeStamp);
         _timeCounter = (_intersection.timeCount != null)
             ? _intersection.timeCount - _timeCounter
